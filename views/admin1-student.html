@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center" style="padding-top:20px;">รายชื่อนักเรียน </h1>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>ลำดับ </th>
+                        <th style="width:400px;">ชื่อ - นามสกุล</th>
+                        <th>คะแนน </th>
+                        <th>เกรด </th>
+                        <th style="width:300px;"> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if(data.length == 0){ %>
+                        <tr>
+                            <td colspan="5"> ไม่พบข้อมูล </td>
+                        </tr>
+                        <% } else { for(var i = 0 ; i < data.length ; i++){ %>
+                            <tr>
+                                <td>
+                                    <%= i+1 %>
+                                </td>
+                                <td>
+                                    <%= data[i].firstname %>
+                                        <%= data[i].lastname %>
+                                </td>
+                                <% if(data[i].score == null || data[i].score == undefined){ %>
+                                    <td></td>
+                                    <% } else { %>
+                                        <td>
+                                            <%= data[i].score %>
+                                        </td>
+                                        <% } %>
+                                            <% if(data[i].grade == null || data[i].grade == undefined){ %>
+                                                <td></td>
+                                                <% } else { %>
+                                                    <td>
+                                                        <%= data[i].grade %>
+                                                    </td>
+                                                    <% } %>
+                                                        <td> <a class="btn btn-success" role="button" href="/student/admin/insertscore/<%= data[i].id %>">เพิ่มคะแนน </a><a class="btn btn-warning" role="button" href="/student/admin/update/<%= data[i].id %>"
+                                                                style="margin-left:10px;">แก้ไข </a><a class="btn btn-danger" role="button" href="/student/admin/delete/<%= data[i].id %>" style="margin-left:10px;">ลบ </a></td>
+                            </tr>
+                            <% } } %>
+                </tbody>
+            </table>
+        </div><a class="btn btn-danger" role="button" href="/student/admin/logout" style="float:right;">ออกจากระบบ </a><a class="btn btn-primary" role="button" href="/student/admin/insertname" style="margin-right:10px;float:right;">เพิ่มชื่อนักเรียน </a></div>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
