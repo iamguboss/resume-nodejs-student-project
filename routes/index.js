@@ -11,6 +11,22 @@ router.get('/api', function(req, res, next) {
     res.json(data)
 })
 
+router.get('/api/student', function(req, res, next) {
+    Student.find(function(err, docs) {
+        if (err) {
+            return next(err)
+        } else {
+            if (docs.length == 0) {
+                var data = { code: 404, msg: 'ไม่พบข้อมูล' }
+                res.json(data)
+            } else {
+                var data = { code: 200, msg: 'สำเร็จ', data: docs }
+                res.json(data)
+            }
+        }
+    })
+})
+
 router.get('/student', function(req, res, next) {
     Student.find(function(err, docs) {
         if (err) return next(err)
